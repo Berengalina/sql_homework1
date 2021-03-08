@@ -24,7 +24,7 @@ public class DataHelper {
     }
 
     public static AuthInfo getInvalidAuthInfo(){
-        return new AuthInfo("invalid", "invalid");
+        return new AuthInfo("vasya", "invalid");
     }
 
     @Value
@@ -40,5 +40,19 @@ public class DataHelper {
         val auth_code = runner.query(conn, usersSQL, new BeanHandler<>(DB_Code.class));
         return new VerificationCode(auth_code.getCode());
     }
+
+    @Value
+    public static class Status {
+        private String status;
+    }
+
+    public static String getStatusfromDB() throws SQLException {
+        val usersSQL = "SELECT status FROM users WHERE login='vasya'";
+        val runner = new QueryRunner();
+        val conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/app_db", "app", "pass");
+        val status = runner.query(conn, usersSQL, new BeanHandler<>(DB_Users.class));
+        return status.getStatus();
+    }
+
 
 }

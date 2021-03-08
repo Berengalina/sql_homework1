@@ -10,6 +10,7 @@ import ru.netology.page.LoginPage;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegisterUser {
 
@@ -31,12 +32,14 @@ public class RegisterUser {
 
 
     @Test
-    void shouldBlockAfterThreeWrongPassword(){
+    void shouldBlockAfterThreeWrongPassword() throws SQLException {
         val loginPage = new LoginPage();
         val invalidAuthInfo = DataHelper.getInvalidAuthInfo();
         loginPage.invalidLogin(DataHelper.getInvalidAuthInfo());
         loginPage.invalidLogin2();
         loginPage.invalidLogin3();
+        val actual = DataHelper.getStatusfromDB();
+        assertEquals ("blocked", actual);
 
     };
 
