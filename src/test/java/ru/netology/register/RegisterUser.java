@@ -59,7 +59,7 @@ public class RegisterUser {
     @Test
     void shouldBlockAfterThreeWrongPassword() throws SQLException {
         val loginPage = new LoginPage();
-        val invalidAuthInfo = DataHelper.getInvalidAuthInfo();
+        DataHelper.getInvalidAuthInfo();
         loginPage.invalidLogin(DataHelper.getInvalidAuthInfo());
         loginPage.invalidLogin2();
         loginPage.invalidLogin3();
