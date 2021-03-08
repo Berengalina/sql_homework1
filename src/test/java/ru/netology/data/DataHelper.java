@@ -53,12 +53,8 @@ public class DataHelper {
 
     public static void insertThreeCodes() throws SQLException {
         val runner = new QueryRunner();
-//        val dataSQL_update_users = "UPDATE users SET id = 'f2df6097-61ad-48ce-b65a-479d99d2fbe7' WHERE login = 'vasya';";
-//        val dataSQL_update_cards = "UPDATE cards SET user_id = 'f2df6097-61ad-48ce-b65a-479d99d2fbe7' WHERE number = '5559 0000 0000 0002';";
         val dataSQL = "INSERT INTO auth_codes(id, user_id, code) VALUES (?, ?, ?);";
         val conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/app_db", "app", "pass");
-//        runner.update(conn, dataSQL_update_users);
-//        runner.update(conn, dataSQL_update_cards);
         runner.update(conn, dataSQL, "334", DataHelper.getIDfromDB(), "123456");
         runner.update(conn, dataSQL, "335", DataHelper.getIDfromDB(), "123457");
         runner.update(conn, dataSQL, "336", DataHelper.getIDfromDB(), "123458");
@@ -84,8 +80,5 @@ public class DataHelper {
         val id = runner.query(conn, usersSQL, new BeanHandler<>(DB_Users.class));
         return id.getId();
     }
-
-
-
 
 }

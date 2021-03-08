@@ -10,7 +10,7 @@ public class DashboardPage {
 
     private SelenideElement headingTitle = $(byText("Личный кабинет"));
 
-    public void checkHeadingTitle(){
+    public void checkHeadingTitle() {
         headingTitle.shouldBe(Condition.visible);
     }
 }
